@@ -2,11 +2,15 @@
 
 namespace Gri\Acme\Model;
 
+use ArrayObject;
+
 class Question
 {
     private $id;
 
     private $text;
+
+    private $answers;
 
     public function setId(int $id): Question
     {
@@ -30,5 +34,17 @@ class Question
     public function getText(): string
     {
         return $this->text;
+    }
+
+    public function addAnswer(Answer $answer): Question
+    {
+        $this->answers[] = $answer;
+
+        return $this;
+    }
+
+    public function getAnswers(): array
+    {
+        return $this->answers;
     }
 }

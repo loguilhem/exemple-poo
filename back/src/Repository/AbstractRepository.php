@@ -2,7 +2,7 @@
 
 namespace Gri\Acme\Repository;
 
-use Gri\Acme\Config\Database;
+use Gri\Acme\Config\Db;
 
 abstract class AbstractRepository
 {
@@ -10,6 +10,6 @@ abstract class AbstractRepository
 
     public function __construct()
     {
-        $this->pdo = Database::getInstance();
+        $this->pdo = Db::getInstance();
     }
 }

@@ -12,10 +12,15 @@ class MainController
     {
         $repo = QuestionRepository::getInstance();
         $all = $repo->getAllQuestions();
-    
-        $dataEncode = json_encode($all);
 
-        return $dataEncode;
+        $response = [
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'Toutes les questions enregistrées',
+            'data' => $all
+        ];
+
+        return json_encode($response);
     }
 
     public function addQuestion(string $data)
@@ -38,6 +43,33 @@ class MainController
                 'id' => $newQuestion->getId(),
                 'text' => $newQuestion->getText()
             ]
+        ];
+
+        return json_encode($response);
+    }
+
+    public function readQuestion(int $idQuestion)
+    {
+        $repo = QuestionRepository::getInstance();
+        $question = $repo->getQuestionById($idQuestion, true);
+
+        // on veut éviter une référence circulaire donc on reconstruit le tableau
+
+        $data = [];
+        $data['id'] = $question->getId();
+        $data['text'] = $question->getText();
+        foreach ($question->getAnswers() as $answer) {
+            $data['answers'][$answer->getId()]['id'] = $answer->getId();
+            $data['answers'][$answer->getId()]['text'] = $answer->getText();
+            $data['answers'][$answer->getId()]['status'] = $answer->getStatus();
+        }
+
+        header('Content-Type: application/json');
+        $response = [
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'La question avec ID et ses réponses',
+            'data' => $data
         ];
 
         return json_encode($response);

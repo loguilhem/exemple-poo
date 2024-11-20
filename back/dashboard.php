@@ -15,4 +15,11 @@ if (!empty($_GET['action']) && AppConst::ADD === $_GET['action']) {
     exit;
 }
 
+if (!empty($_GET['action']) && !empty($_GET['id']) && AppConst::READ === $_GET['action']) {
+    $id = (int) $_GET['id'];
+    echo $controller->readQuestion($id);
+
+    exit;
+}
+
 echo $controller->index();

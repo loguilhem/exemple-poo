@@ -34,7 +34,6 @@ class MainController
         $repo = QuestionRepository::getInstance();        
         $repo->addQuestion($newQuestion);
 
-        header('Content-Type: application/json');
         $response = [
             'status' => 'success',
             'code' => 200,
@@ -64,7 +63,7 @@ class MainController
             $data['answers'][$answer->getId()]['status'] = $answer->getStatus();
         }
 
-        header('Content-Type: application/json');
+    
         $response = [
             'status' => 'success',
             'code' => 200,

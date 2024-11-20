@@ -2,10 +2,7 @@
 
 namespace Gri\Acme\Validator;
 
-use Gri\Acme\Config\AppConst;
 use InvalidArgumentException;
-use PDO;
-use PDOException;
 
 class NewQuestionValidator
 {

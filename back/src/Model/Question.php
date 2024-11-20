@@ -6,7 +6,7 @@ class Question
 {
     private $id;
 
-    private $question;
+    private $text;
 
     public function setId(int $id): Question
     {
@@ -20,10 +20,15 @@ class Question
         return $this->id;
     }
 
-    public function setQuestion(string $question): Question
+    public function setText(string $text): Question
     {
-        $this->question = $question;
+        $this->text = $text;
 
         return $this;
+    }
+
+    public function getText(): string
+    {
+        return $this->text;
     }
 }

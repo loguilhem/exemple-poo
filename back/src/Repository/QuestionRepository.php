@@ -3,8 +3,9 @@
 namespace Gri\Acme\Repository;
 
 use Gri\Acme\Config\Database;
+use Gri\Acme\Model\Question;
 
-class QuestionRepository
+class QuestionRepository extends AbstractRepository
 {
     private static $instance = null;
 
@@ -19,16 +20,25 @@ class QuestionRepository
         return self::$instance;
     }
 
-    public function getAllQuestions()
+    public function getAllQuestions(): array
     {
-        $pdo = Database::getInstance();
-
         $sql = "SELECT * FROM question;";
 
-        $resultats = $pdo->prepare($sql);
+        $resultats = $this->pdo->prepare($sql);
         $resultats->execute();
+
         return  $resultats->fetchAll();
+    }
+
+    public function addQuestion(Question &$question): Question
+    {
+        $sql = "INSERT INTO question (text) VALUES (:text)";
         
-        
+        $new = $this->pdo->prepare($sql);
+        $new->execute([':text' => $question->getText()]);
+
+        $question->setId($this->pdo->lastInsertId());
+
+        return $question;
     }
 }

@@ -1,0 +1,15 @@
+{
+    "name": "gri/acme",
+    "autoload": {
+        "psr-4": {
+            "Gri\\Acme\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Guilhem",
+            "email": "guilhem.villarroya@gri.ch"
+        }
+    ],
+    "require": {}
+}

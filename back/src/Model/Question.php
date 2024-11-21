@@ -47,7 +47,7 @@ class Question
 
     public function getAnswers(): array
     {
-        return $this->answers;
+        return $this->answers ?? [];
     }
 
     public function setStatus(int $status): Question

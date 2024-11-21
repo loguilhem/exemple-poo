@@ -17,5 +17,4 @@ const ToggleStatusDisplay = ({status}) => {
     )
 }
 
-
 export default ToggleStatusDisplay;

@@ -38,10 +38,10 @@ class MainController extends AbstractController
         // on veut éviter une référence circulaire donc on reconstruit le tableau
         $data = [];
         $data['id'] = $question->getId();
-        $data['cleanData$cleanData'] = $question->getText();
+        $data['text'] = $question->getText();
         foreach ($question->getAnswers() as $answer) {
             $data['answers'][$answer->getId()]['id'] = $answer->getId();
-            $data['answers'][$answer->getId()]['cleanData$cleanData'] = $answer->getText();
+            $data['answers'][$answer->getId()]['text'] = $answer->getText();
             $data['answers'][$answer->getId()]['status'] = $answer->getStatus();
         }
 
@@ -49,8 +49,7 @@ class MainController extends AbstractController
         $response = [
             'status' => 'success',
             'code' => 200,
-            'message' => 'La question avec ID et ses réponses',
-            'data' => $data
+            'question' => $data
         ];
 
         return json_encode($response);

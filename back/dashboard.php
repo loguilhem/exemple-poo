@@ -22,7 +22,7 @@ if (!empty($_GET['action']) && AppConst::ADD === $_GET['action']) {
 }
 
 // route to update a question
-if (!empty($_GET['action'] && !empty(( AppConst::UPDATE === $_GET['action'])))) {
+if (!empty($_GET['action']) && ( AppConst::UPDATE === $_GET['action'])) {
     $json = file_get_contents('php://input');
 
     echo $controller->updateQuestion($json);

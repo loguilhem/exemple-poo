@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
+import ToggleStatusDisplay from './ToggleStatusDisplay';
 //import Spinner from
 
 const App = () => {
@@ -45,7 +46,7 @@ const App = () => {
             <th>Id</th>
             <th>Texte</th>
             <th>Editer</th>
-            <th>Supprimer</th>
+            <th>Etat</th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +55,7 @@ const App = () => {
               <td key={item.id}>{item.id}</td>
               <td>{item.text}</td>
               <td>Edit</td>
-              <td>Supprimer</td>
+              <td><ToggleStatusDisplay status={item.status}></ToggleStatusDisplay></td>
             </tr>
           ))}
         </tbody>

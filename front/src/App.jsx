@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
+//import Spinner from
 
 const App = () => {
   const [data, setData] = useState(null);
@@ -20,7 +21,6 @@ const App = () => {
       .then((json) => {
         setData(json.data); // Stocker les données
         setLoading(false); // Fin du chargement
-        console.log(json);
       })
       .catch((error) => {
         setError(error.message); // Gérer les erreurs
@@ -28,7 +28,11 @@ const App = () => {
       });
   }, []); // [] pour ne faire la requête qu'une seule fois
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return 
+  <div>
+    Spinner 
+  </div>
+  ;
   if (error) return <div>Error: {error}</div>;
 
   return (

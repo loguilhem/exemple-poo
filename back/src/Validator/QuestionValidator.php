@@ -4,7 +4,7 @@ namespace Gri\Acme\Validator;
 
 use InvalidArgumentException;
 
-class NewQuestionValidator
+class QuestionValidator
 {
     public function cleanup(string $params)
     {
@@ -27,6 +27,14 @@ class NewQuestionValidator
         $text = trim($textRaw);
         $text = htmlspecialchars($textRaw, ENT_QUOTES, 'UTF-8');
 
-        return $text;
+        $status = (int) $paramsToClean['status'];
+        $id = $paramsToClean['id'] ?? (int) $paramsToClean;
+
+
+        return [
+            'id' => $id,
+            'text' => $text,
+            'status' => $status
+        ];
     }
 }

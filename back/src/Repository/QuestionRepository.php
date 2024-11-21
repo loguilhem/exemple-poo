@@ -32,18 +32,6 @@ class QuestionRepository extends AbstractRepository
         return  $resultats->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function addQuestion(Question &$question): Question
-    {
-        $sql = "INSERT INTO question (text) VALUES (:text)";
-        
-        $new = $this->pdo->prepare($sql);
-        $new->execute([':text' => $question->getText()]);
-
-        $question->setId($this->pdo->lastInsertId());
-
-        return $question;
-    }
-
     public function getQuestionById(int $id, bool $withAnswers = false): Question
     {
         $sql = 'SELECT * FROM question WHERE id = "' . $id .'";';
@@ -86,9 +74,37 @@ class QuestionRepository extends AbstractRepository
                 ->setStatus($result["status"])
             ;
 
-
             $question->addAnswer($answer);
         }
+
+        return $question;
+    }
+
+    public function addQuestion(Question &$question): Question
+    {
+        $sql = "INSERT INTO question (text, status) VALUES (:text, :status)";
+        
+        $query = $this->pdo->prepare($sql);
+        $query->execute([
+            ':text' => $question->getText(),
+            ':status' => $question->getStatus()
+        ]);
+
+        $question->setId($this->pdo->lastInsertId());
+
+        return $question;
+    }
+
+    public function updateQuestion(Question $question): Question
+    {
+        $sql = "UPDATE question SET text = :text, status = :status WHERE id = :id;";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute([
+            ':id' => $question->getId(),
+            ':text' => $question->getText(),
+            ':status' => $question->getStatus()
+        ]);
 
         return $question;
     }

@@ -12,6 +12,7 @@ header('Content-Type: application/json');
 
 $controller = new MainController();
 
+// route to add a question
 if (!empty($_GET['action']) && AppConst::ADD === $_GET['action']) {
     $json = file_get_contents('php://input');
 
@@ -20,11 +21,23 @@ if (!empty($_GET['action']) && AppConst::ADD === $_GET['action']) {
     exit;
 }
 
+// route to update a question
+if (!empty($_GET['action'] && !empty(( AppConst::UPDATE === $_GET['action'])))) {
+    $json = file_get_contents('php://input');
+
+    echo $controller->updateQuestion($json);
+
+    exit;
+}
+
+// route to read question by id
 if (!empty($_GET['action']) && !empty($_GET['id']) && AppConst::READ === $_GET['action']) {
     $id = (int) $_GET['id'];
+
     echo $controller->readQuestion($id);
 
     exit;
 }
 
+// default route to read all questions
 echo $controller->index();

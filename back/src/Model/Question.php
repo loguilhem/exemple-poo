@@ -12,6 +12,8 @@ class Question
 
     private $answers;
 
+    private $status;
+
     public function setId(int $id): Question
     {
         $this->id = $id;
@@ -46,5 +48,17 @@ class Question
     public function getAnswers(): array
     {
         return $this->answers;
+    }
+
+    public function setStatus(int $status): Question
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getStatus(): int
+    {
+        return (int) $this->status;
     }
 }
